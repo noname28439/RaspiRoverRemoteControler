@@ -1,4 +1,6 @@
 from flask import Flask, render_template, Markup, request
+import Wheel1 as WL
+import Wheel2 as WR
 
 app = Flask(__name__)
 
@@ -21,12 +23,21 @@ def stickreceaver():
             left=1
         if right>1:
             right=1
+        if left<-1:
+            left=-1
+        if right<-1:
+            right=-1
 
         print(str(left) + "|" + str(right))
+        WL.movement(left)
+        WR.movement(right)
+    else:
+        WL.movement(0)
+        WR.movement(0)
 
     return ""
 
 
 
 
-app.run(debug=True, host="0.0.0.0", threaded=True, port=8001)
+app.run(debug=False, host="0.0.0.0", threaded=False, port=8001)
